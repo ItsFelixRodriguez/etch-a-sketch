@@ -1,0 +1,27 @@
+/* CSS for Etch-A-Sketch */
+.board{
+    width: 500px;
+    height: 500px;
+    display: grid;
+}
+.grid {
+    display: flex;
+}
+
+.column {
+    flex: 1;
+}
+
+.row {
+    margin: 2px;
+    background: black;
+    text-align: center;
+    border: 10px;
+    color:blueviolet
+}
+
+.container {
+    color: blueviolet;
+    border: white;
+    display: flex;
+}
