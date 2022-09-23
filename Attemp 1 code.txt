@@ -1,0 +1,100 @@
+This is a dumping ground for my first attempt. I was unable to make the mouseover use individual squares.
+
+HTML:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type="text/css" href="style.css">
+    <link rel="reset" type="text/css" href="reset.css">
+    <title>Etch-A-Sketch</title>
+</head>
+<body>
+    
+    <div class ="flex-container"></div>
+    <div class="title"><h1>Etch-A-Sketch</h1></div> 
+    <div class="content"> 
+        <div class="board"> </div>
+        <div class="buttons">
+            <button>Black</button>
+            <button>White</button>
+            <button> Random</button>
+            <button>Reset</button>
+        </div>
+    </div>
+    <div>
+        <input type="text" placeholder="size of board" value = "16"onchange = "changeSize(this.value)"/>
+        <button>Set Size</button>
+    </div>
+  
+    <script src="app.js"></script>
+</body>
+</html>
+
+CSS
+/* CSS for Etch-A-Sketch */
+.flex-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(rgba(96, 79, 252, 0.082), white);
+  }
+  .board {
+    width: 80%;
+    height: 80%;
+    display: grid;
+    background-color: white;
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+      0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  }
+  .board:hover {
+    cursor: pointer;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 300px;
+    min-height: 300px;
+    width: 60vw;
+    height: 60vw;
+    max-width: 600px;
+    max-height: 600px;
+  }
+
+
+
+  JavaScript 
+
+  // app
+let color = '';
+function populateBoard (size) {
+    let board = document.querySelector(".board");
+    let squares = board.querySelectorAll("div");
+    squares.forEach((div) =>  div.remove());
+    board.style.gridTemplateColumns = `repeat (${size}, 2fr)`;
+    board.style.gridTemplateRows = `repeat (${size}, 2fr)`;
+
+    let amount = size * size;
+    for (let i=0; i < amount; i++){
+    let square = document.createElement("div");
+    square.addEventListener("mouseover",() => {
+        square.style.backgroundColor = "black"
+    });
+    square.style.backgroundColor= "white";
+    board.insertAdjacentElement("beforeend", square);
+    }
+}
+populateBoard(16)
+
+function changeSize (input){
+    if (input >= 2 && input <= 100){
+        populateBoard(input);
+    } else {
+        console.log("Fix the Grid")
+    }  
+}

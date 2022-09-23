@@ -4,28 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel= "stylesheet" type="text/css" href="style.css">
-    <link rel="reset" type="text/css" href="reset.css">
-    <title>Etch-A-Sketch</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>Etch-A-Sketchlike</title>
 </head>
 <body>
-    
-    <div class ="flex-container"></div>
-    <div class="title"><h1>Etch-A-Sketch</h1></div> 
-    <div class="content"> 
-        <div class="board"> </div>
-        <div class="buttons">
-            <button>Black</button>
-            <button>White</button>
-            <button> Random</button>
-            <button>Reset</button>
-        </div>
+    <div class="right">
+        <div class="gridContainer"></div>
     </div>
-    <div>
-        <input type="text" placeholder="size of board" value = "16"onchange = "changeSize(this.value)"/>
-        <button>Set Size</button>
+    <div class="page">
+        <h1>Etch-A-Sketchlike</h1>
+        <label for="quantity"> Type a Value For Grid ize: </label>
+        <input type="number" id="quantity" name="quantity"/>
+        <button class="reset">RESET</button>
+        <button class="color">Color</button>
     </div>
-  
     <script src="app.js"></script>
 </body>
 </html>

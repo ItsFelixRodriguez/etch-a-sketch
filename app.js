@@ -1,28 +1,47 @@
-// app
-let color = '';
-function populateBoard (size) {
-    let board = document.querySelector(".board");
-    let squares = board.querySelectorAll("div");
-    squares.forEach((div) =>  div.remove());
-    board.style.gridTemplateColumns = `repeat (${size}, 1fr)`;
-    board.style.gridTemplateRows = `repeat (${size}, 1fr)`;
+const grid = document.querySelector(".gridContainer");
+const userInput = document.getElementById("quantity");
+const resetButton = document.querySelector(".reset");
 
-    let amount = size * size;
-    for (let i=0; i < amount; i++){
-    let square = document.createElement("div");
-    square.addEventListener("mouseover",() => {
-        square.style.backgroundColor = "black"
-    });
-    square.style.backgroundColor= "white";
-    board.insertAdjacentElement("beforeend", square);
-    }
-}
-populateBoard(16)
+createGrid = () => {
+  for (let i = 0; i < 256; i++) {
+    const div = document.createElement("div");
+    div.classList.add("square");
+    grid.appendChild(div);
+  }
+};
 
-function changeSize (input){
-    if (input >= 2 && input <= 100){
-        populateBoard(input);
-    } else {
-        console.log("Fix the Grid")
-    }  
-}
+updateGrid = () => {
+  grid.innerHTML = "";
+  grid.style.setProperty(
+    "grid-template-columns",
+    `repeat(${userInput.value}, 2fr)`
+  );
+  grid.style.setProperty(
+    "grid-template-rows",
+    `repeat(${userInput.value}, 2fr)`
+  );
+  for (let i = 0; i < userInput.value * userInput.value; i++) {
+    const div = document.createElement("div");
+    div.classList.add("square");
+    grid.appendChild(div);
+  }
+  console.log(userInput.value);
+};
+
+const square = document.querySelector("div");
+square.addEventListener("mouseover", function(event) {
+  event.target.classList.replace("square", "color");
+});
+
+userInput.addEventListener("change", updateGrid);
+
+resetButton.addEventListener("click", function() {
+  grid.innerHTML = "";
+  userInput.value = "";
+  grid.style.setProperty("grid-template-columns", `repeat(16, 2fr)`);
+  grid.style.setProperty("grid-template-rows", `repeat(16, 2fr)`);
+  createGrid();
+});
+
+
+createGrid();
